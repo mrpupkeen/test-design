@@ -1,6 +1,6 @@
 ---
 name: test-design
-description: Use when writing, reviewing, or refactoring tests of any kind (unit, integration, e2e), and when deciding whether a test is worth writing at all. Governs test design quality — what to test, what to mock, how to structure and assert — based on Khorikov's "Unit Testing Principles, Practices, and Patterns". Complements TDD skills (which govern WHEN tests are written); this skill governs WHAT a good test looks like.
+description: Use when writing, reviewing, or refactoring tests (unit, integration, e2e), or deciding what to test and what to mock. Khorikov-based test design — four pillars, code classification, strict mocking policy. Complements TDD skills, which govern when tests are written.
 ---
 
 # Test Design (Khorikov)
@@ -99,3 +99,23 @@ higher bar for testing reads than writes. Details:
   bad, high proves nothing; never a target)
 
 Anti-pattern fixes: `references/anti-patterns.md`.
+
+## Explicit invocation modes
+
+When the user invokes this skill directly (e.g. `/test-design:test-design`),
+interpret the arguments as one of three modes:
+
+- **review `<path>`** (or a path to existing tests): audit each test against
+  the four-pillars check and the red-flags list. Report per test: verdict
+  (keep / rewrite / delete), the pillar or rule violated, and the concrete
+  fix. Flag resistance-to-refactoring violations as highest severity.
+- **write `<path>`** (or a path to production code): run Step 1
+  classification first and state the quadrant. Only then write tests of the
+  type the quadrant prescribes — or decline (trivial code), or propose the
+  Humble Object refactor before any test (overcomplicated code).
+- **classify `<path>`**: classify the code into the quadrant and recommend
+  the testing approach without writing tests.
+- No arguments: ask which mode, or infer from the current task.
+
+When a TDD skill is also active, it governs the red-green-refactor sequence;
+this skill governs test design within that sequence.

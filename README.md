@@ -19,8 +19,6 @@ written; this governs **what** a good test looks like.
   - `references/code-classification.md` — the quadrant + Humble Object refactor
   - `references/integration-and-db.md` — happy-path selection, real-DB rules
   - `references/anti-patterns.md` — ch. 11 anti-patterns with fixes
-- `commands/test-design.md` — explicit `/test-design` trigger with
-  `review | write | classify` modes
 
 ## Install
 
@@ -44,8 +42,9 @@ To try a local checkout without installing:
 claude --plugin-dir /path/to/test-design
 ```
 
-The skill then activates automatically on test-related work, and the command
-is available as a slash command (namespaced under the plugin).
+The skill activates automatically on test-related work and can be invoked
+explicitly as `/test-design:test-design` with `review | write | classify`
+modes (see SKILL.md).
 
 ## Suggested pairing
 

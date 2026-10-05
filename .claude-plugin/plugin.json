@@ -1,7 +1,7 @@
 {
   "name": "test-design",
   "description": "Test design quality based on Khorikov's 'Unit Testing Principles, Practices, and Patterns': four pillars, code classification, strict mocking policy, integration/database testing rules, and anti-pattern fixes. Complements TDD process skills (superpowers, pstack) — they govern WHEN tests are written, this governs WHAT a good test looks like.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "Mr Pupkeen",
     "email": "mrpupkeen@gmail.com"
