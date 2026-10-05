@@ -1,0 +1,14 @@
+{
+  "name": "test-design-marketplace",
+  "owner": {
+    "name": "Mr Pupkeen",
+    "email": "mrpupkeen@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "test-design",
+      "source": "./",
+      "description": "Khorikov-based test design: four pillars, code classification, strict mocking policy, integration/DB rules, anti-pattern fixes."
+    }
+  ]
+}
