@@ -56,3 +56,8 @@ four-pillars check runs at REFACTOR and in code review.
 With pstack: `tdd`'s "skip when impractical" escape hatch should route
 through this plugin's classification — "impractical to test" usually means
 quadrant-4 code, where the answer is a Humble Object refactor, not a skip.
+
+## License
+
+MIT — see [LICENSE](LICENSE). The book itself is © Vladimir Khorikov / Manning;
+this repo contains only an original paraphrase of its ideas.

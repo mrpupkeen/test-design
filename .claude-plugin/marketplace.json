@@ -1,5 +1,6 @@
 {
   "name": "test-design-marketplace",
+  "description": "Test-design guidance for Claude Code, based on Khorikov's Unit Testing Principles, Practices, and Patterns: what to test, what to mock, and how to write tests that survive refactoring.",
   "owner": {
     "name": "Mr Pupkeen",
     "email": "mrpupkeen@gmail.com"

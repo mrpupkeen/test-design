@@ -16,5 +16,6 @@
     "test-design"
   ],
   "homepage": "https://github.com/mrpupkeen/test-design",
-  "repository": "https://github.com/mrpupkeen/test-design"
+  "repository": "https://github.com/mrpupkeen/test-design",
+  "license": "MIT"
 }
