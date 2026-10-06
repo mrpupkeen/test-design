@@ -1,9 +1,14 @@
 # test-design
 
-A Claude Code plugin encoding the test-design principles from Vladimir
+[![skills.sh](https://skills.sh/b/mrpupkeen/test-design)](https://skills.sh/mrpupkeen/test-design)
+
+An [Agent Skill](https://agentskills.io) encoding the test-design principles from Vladimir
 Khorikov's *Unit Testing Principles, Practices, and Patterns* (Manning, 2020).
 All text is an original condensed paraphrase of the book's ideas — buy the
 book, it's worth it.
+
+Works with Claude Code, Codex, OpenCode, and any other agent that reads
+`SKILL.md` skills.
 
 It complements process-oriented TDD skills (obra/superpowers
 `test-driven-development`, pstack `tdd`): those govern **when** tests are
@@ -22,7 +27,21 @@ written; this governs **what** a good test looks like.
 
 ## Install
 
-In Claude Code:
+### Codex, OpenCode, and other agents
+
+With the [skills CLI](https://github.com/vercel-labs/skills):
+
+```bash
+npx skills add mrpupkeen/test-design -a codex -a opencode
+```
+
+This installs into `.agents/skills/test-design/`. Add `-g` to install for
+your user instead of the current project, or drop `-a` to choose agents
+interactively.
+
+### Claude Code
+
+As a plugin:
 
 ```
 /plugin marketplace add mrpupkeen/test-design
@@ -36,15 +55,22 @@ claude plugin marketplace add mrpupkeen/test-design
 claude plugin install test-design@test-design-marketplace
 ```
 
+Or with the skills CLI:
+
+```bash
+npx skills add mrpupkeen/test-design -a claude-code
+```
+
 To try a local checkout without installing:
 
 ```bash
 claude --plugin-dir /path/to/test-design
 ```
 
-The skill activates automatically on test-related work and can be invoked
-explicitly as `/test-design:test-design` with `review | write | classify`
-modes (see SKILL.md).
+The skill activates automatically on test-related work. It can also be
+invoked explicitly with `review | write | classify` modes (see SKILL.md):
+`/test-design:test-design` from the Claude Code plugin, `/test-design` when
+installed with the skills CLI.
 
 ## Suggested pairing
 

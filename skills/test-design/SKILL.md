@@ -102,7 +102,7 @@ Anti-pattern fixes: `references/anti-patterns.md`.
 
 ## Explicit invocation modes
 
-When the user invokes this skill directly (e.g. `/test-design:test-design`),
+When the user invokes this skill directly (e.g. `/test-design review src/`),
 interpret the arguments as one of three modes:
 
 - **review `<path>`** (or a path to existing tests): audit each test against
