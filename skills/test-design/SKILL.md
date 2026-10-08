@@ -38,14 +38,21 @@ Rule of thumb: code can be deep (complex) or wide (many collaborators), never bo
 - **Test observable behavior through the public API.** Never test private
   methods. If a private method is too complex to reach through the public API,
   that's a missing abstraction — extract a class, don't widen access.
-- **No mocks in unit tests. Ever.** Mocks are for unmanaged out-of-process
-  dependencies only (external APIs, message bus, SMTP), and only controllers
-  touch those — so mocks appear only in integration tests. Your own database
-  is a managed dependency: use the real one. Full rules and the
+- **No mocks in domain unit tests.** Mocks are for unmanaged out-of-process
+  dependencies only (external APIs, message bus, SMTP, messages delivered to
+  the user), and only controllers touch those — so mocks belong in controller
+  (integration) tests. Your own database is a managed dependency: use the real
+  one. This rule decides where a verification lives, never whether it exists:
+  if a test checks that such a command happened, reclassify or split the test;
+  don't delete the only proof the command was sent. Full rules and the
   managed/unmanaged table: `references/mocking.md`.
 - **Never assert interactions with stubs** (calls that fetch input data). An
   incoming call is an implementation detail, not an outcome. Over-specification
-  is the #1 cause of fragile tests.
+  is the #1 cause of fragile tests. But a stub must not ignore inputs the code
+  under test chooses: when an argument (period, ID, filter, model) decides what
+  the real dependency returns, key the stub's canned data by it so a wrong
+  query changes the outcome. Where the outcome can't reflect the argument,
+  keep one focused check of the request at that edge rather than lose it.
 - **One Arrange-Act-Assert per test, one act line.** Multiple acts = this is an
   e2e test or it must be split. No if/for statements inside tests.
 - **Prefer output-based assertions** (return values) over state-based, over
@@ -88,6 +95,13 @@ higher bar for testing reads than writes. Details:
 
 - A mock in a unit test, or a mock of anything in-process
 - Asserting that a method was called on a stub
+- A stub or shared fake that ignores arguments the code under test chooses,
+  with nothing else catching a wrong value
+- A spy that records when a message or command is built rather than when it is
+  sent (check reused project helpers too); for async APIs, a test that still
+  passes with the `await ...send()` removed
+- An assertion removed in a rewrite with no named surviving test that fails
+  when the behavior it guarded breaks
 - A test that breaks after a refactor while behavior is unchanged
 - Test name mirrors a method name
 - `if`/`for` inside a test; more than one act
@@ -109,10 +123,17 @@ interpret the arguments as one of three modes:
   the four-pillars check and the red-flags list. Report per test: verdict
   (keep / rewrite / delete), the pillar or rule violated, and the concrete
   fix. Flag resistance-to-refactoring violations as highest severity.
+  For every assertion you would remove or weaken, name the regression it
+  catches (or "none — implementation detail") and the assertion that will
+  catch it afterwards.
 - **write `<path>`** (or a path to production code): run Step 1
   classification first and state the quadrant. Only then write tests of the
   type the quadrant prescribes — or decline (trivial code), or propose the
   Humble Object refactor before any test (overcomplicated code).
+- **Applying fixes** from a review: before removing an assertion that guarded
+  real behavior (an argument the code chooses, a message or command actually
+  sent), break that production line and confirm some test still fails. If
+  none does, the rewrite is incomplete.
 - **classify `<path>`**: classify the code into the quadrant and recommend
   the testing approach without writing tests.
 - No arguments: ask which mode, or infer from the current task.
